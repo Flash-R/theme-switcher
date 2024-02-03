@@ -1,9 +1,31 @@
-import React,{useContext} from  'react';
+import React,{useContext,useState,useEffect} from  'react';
 import StyleContext from "../context/styleContext";
 
 const Hello = ()=>{
 
-    const {theme,setTheme} = useContext(StyleContext);
+    const {theme,lightTheme, darkTheme} = useContext(StyleContext);
+    const [isDark, setIsDark] = useState(false);
+
+    useEffect(()=>{
+        let currentTheme = localStorage.getItem("isDark");
+        setIsDark(currentTheme == "true" ? true : false);
+        if(currentTheme == "false"){
+            lightTheme();
+        }else{
+            darkTheme()
+        }
+    },[])
+
+    function switchTheme(){
+        if(!isDark){
+            darkTheme();
+        }else{
+            lightTheme();
+        }
+        let currentTheme =  !isDark
+        setIsDark(currentTheme)
+        localStorage.setItem("isDark",currentTheme);
+    }
     return(
         <div>
             <div style={{
@@ -27,13 +49,9 @@ const Hello = ()=>{
                     <li>Item Three (a longer item for demonstration)</li>
                 </ol>
             </div>
-            <button onClick={
-                () => setTheme({
-                    color:"white",
-                    backgroundColor:"black",
-                    border:`3px solid green`
-                })
-            }>Switch to dark</button>
+            <button onClick={switchTheme}>Switch theme</button>
+            {/* <button onClick={darkTheme }>Switch to dark</button>
+            <button onClick={lightTheme }>Switch to Light</button> */}
         </div>
     )
 }

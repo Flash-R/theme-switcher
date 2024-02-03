@@ -14,8 +14,8 @@ const StyleProvider = (props) =>{
         <div>
             <styleContext.Provider value={{
                 theme, 
-                lightTheme: ()=>setTheme({...theme, color:"black",backgroundColor:"white",border: "1px solid  grey"}),
-                darkTheme:()=>setTheme({...theme,color:"red",backgroundColor:"black", border:  "2px dashed red"}),
+                lightTheme: ()=>setTheme({...theme, color:"red",backgroundColor:"white",border: "1px solid  green"}),
+                darkTheme:()=>setTheme({...theme,color:"white",backgroundColor:"black", border:  "2px solid red"}),
                 }}>
                 {props.children}
             </styleContext.Provider>
